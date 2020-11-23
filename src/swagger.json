@@ -1,0 +1,412 @@
+{
+  "swagger":"2.0",
+  "info":{
+    "version":"1.0.0",
+    "title":"eGestor",
+    "description":"Application to control emplooyes",
+    "license":{
+      "name":"MIT",
+      "url":"https://opensouce.org/linceses/MIT"
+    }
+  },
+
+  "host":"localhost:3333",
+  "basePath":"",
+
+  "tags":[
+    {
+      "name":"Employees",
+      "description":"API for emplooyes in the system"
+    }
+  ],
+
+  "schemes":[
+    "http"
+  ],
+
+  "consumes":[
+    "application/json"
+  ],
+
+  "produces":[
+    "application/json"
+  ],
+
+  "paths":{
+    "/employees/":{
+      "get":{
+        "tags":[
+          "Employees"
+        ],
+        "summary":"Get all emplooyes in system",
+        "responses":{
+          "200":{
+            "description":"OK",
+            "schema":{
+              "$ref":"#/definitions/Employees"
+            }
+          }
+        }
+      },
+      "post":{
+        "tags":["Employees"],
+        "summary":"Create new emplooye in system",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Employee data",
+            "schema": {
+              "$ref": "#/definitions/Employee"
+            },
+            "required": true
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"OK",
+            "schema":{
+              "$ref":"#/definitions/Employee"
+            }
+          },
+            "400":{
+              "description": "All fields must be filled"
+          }
+        }
+      }
+    },
+    "/employees/import":{
+      "post":{
+        "tags": ["Employees"],
+        "summary": "Import employees from txt/csv file",
+        "parameters": [{
+          "in": "formData",
+          "required": true,
+          "name": "file",
+          "type": "file",
+          "description": "The file to upload"
+        }],
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "$ref": "#/definitions/Employees"
+            }
+          }
+        }
+      }
+    },
+
+    "/employees/{cpf}":{
+      "delete":{
+        "parameters": [
+          {
+            "name": "cpf",
+            "in": "path",
+            "required": true,
+            "description": "CPF of the employee to delete",
+            "type": "string"
+          }
+        ],
+        "tags":[
+          "Employee"
+        ],
+        "summary":"Delete a emplooye in system",
+        "responses":{
+          "200":{
+            "description":"OK",
+            "schema":{
+              "$ref":"#/definitions/Employee"
+            }
+          }
+        }
+      }
+    },
+
+    "/employees/cpf":{
+      "parameters": [
+        {
+          "name": "value",
+          "in": "query",
+          "required": true,
+          "description": "CPF of the employee to be find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employee"
+        ],
+        "summary": "Get employee with given CPF",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "$ref": "#/definitions/Employee"
+            }
+          },
+          "400":{
+            "description": "Value must be required"
+          },
+          "404":{
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+
+    "/employees/name":{
+      "parameters": [
+        {
+          "name": "value",
+          "in": "query",
+          "required": true,
+          "description": "Name of the employee to be find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee with given name",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "$ref": "#/definitions/Employees"
+            }
+          },
+          "400":{
+            "description": "Value must be required"
+          },
+          "404":{
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+
+    "/employees/position":{
+      "parameters": [
+        {
+          "name": "value",
+          "in": "query",
+          "required": true,
+          "description": "Position of the employee to be find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee with given position",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "$ref": "#/definitions/Employees"
+            }
+          },
+          "400":{
+            "description": "Value must be required"
+          },
+          "404":{
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+
+    "/employees/uf":{
+      "parameters": [
+        {
+          "name": "value",
+          "in": "query",
+          "required": true,
+          "description": "UF of the employee to be find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee with given UF",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "type":"object",
+              "properties":{
+                "employees":{
+                  "type":"object",
+                    "additionalProperties":{
+                      "$ref":"#/definitions/Employee"
+                    }
+                },
+                "total": {
+                  "type": "number"
+                }
+              }
+              }
+
+          },
+          "400":{
+            "description": "Value must be required"
+          },
+          "404":{
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+
+    "/employees/status":{
+      "parameters": [
+        {
+          "name": "value",
+          "in": "query",
+          "required": true,
+          "description": "Status of the employee to be find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee with given status",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "$ref": "#/definitions/Employees"
+            }
+          },
+          "400":{
+            "description": "Value must be required"
+          },
+          "404":{
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+
+    "/employees/salary":{
+      "parameters": [
+        {
+          "name": "min",
+          "in": "query",
+          "required": true,
+          "description": "Max salary of the employees to be find",
+          "type": "number"
+        },
+        {
+          "name": "max",
+          "in": "query",
+          "required": true,
+          "description": "Min salary of the employees to be find",
+          "type": "number"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee with given a min and max salary",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "$ref": "#/definitions/Employees"
+            }
+          },
+          "400":{
+            "description": "Value must be required"
+          },
+          "404":{
+            "description": "Employee not found"
+          }
+        }
+      }
+    },
+
+    "/employees/date":{
+      "parameters": [
+        {
+          "name": "value",
+          "in": "query",
+          "required": true,
+          "description": "Date of the employee to be find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Employees"
+        ],
+        "summary": "Get employee with given date",
+        "responses": {
+          "200":{
+            "description": "OK",
+            "schema":{
+              "$ref": "#/definitions/Employees"
+            }
+          },
+          "400":{
+            "description": "Value must be required"
+          },
+          "404":{
+            "description": "Employee not found"
+          }
+        }
+      }
+    }
+  },
+
+  "definitions":{
+    "Employee":{
+      "type":"object",
+      "properties":{
+        "id":{
+          "type":"number"
+        },
+        "CPF":{
+          "type":"string"
+        },
+        "position":{
+          "type":"string"
+        },
+        "name":{
+          "type":"string"
+        },
+        "UF":{
+          "type":"string"
+        },
+        "salary":{
+          "type":"number"
+        },
+        "status":{
+          "type":"string"
+        },
+        "created_at":{
+          "type":"string"
+        }
+      }
+    },
+    "Employees":{
+      "type":"object",
+      "properties":{
+        "employees":{
+          "type":"object",
+            "additionalProperties":{
+              "$ref":"#/definitions/Employee"
+            }
+        }
+      }
+    }
+  }
+}

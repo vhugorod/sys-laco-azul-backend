@@ -1,0 +1,13 @@
+.idea/
+.vscode/
+node_modules
+build/
+temp/
+./src/database/*.sqlite
+
+tmp/*
+!tmp/.gitkeep
+
+src/database/db.sqlite
+coverage/*
+

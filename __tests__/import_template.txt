@@ -1,0 +1,7 @@
+DataCad;Cargo;Cpf;Nome;UfNasc;Salario;Status
+
+15/04/2017;Dev Jr;85235708709;Aaron Aaberg;AP;8965.30;ATIVO
+
+19/04/2017;AC Sr;59984408701;Aaron Aaby;RO;5312.70;BLOQUEADO
+
+03/04/2017;Analista Sr;51704568080;Abbey Aadland;RJ;5448.60;INATIVO
